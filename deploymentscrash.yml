@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crashloop-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crashloop-demo
+  template:
+    metadata:
+      labels:
+        app: crashloop-demo
+    spec:
+      containers:
+      - name: crashloop-container
+        image: nginx:latest
+        command: ["/bin/sh"]
+        args: ["-c", "echo 'Starting container'; exit 1"]
